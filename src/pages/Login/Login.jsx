@@ -123,8 +123,55 @@ function Login() {
           </div>
 
           {/* Right Container  */}
-          <div className="right-container hidden  md:flex flex-col w-full h-full gap-10 p-6 md:p-10 bg-[#1C4532]">
-            <div className="upper-container">
+          <div className="hidden md:flex w-full h-full relative overflow-hidden bg-[#184D3B] rounded-2xl">
+
+            {/* Background Circle */}
+            <div className="absolute w-[500px] h-[500px] bg-white/10 rounded-full top-[-150px] right-[-150px]"></div>
+
+            <div className="relative z-10 flex flex-col justify-between w-full p-10 text-white">
+
+              {/* Top Support */}
+              <div className="flex items-center gap-2 opacity-90">
+                <span className="text-lg">🎧</span>
+                <span className="text-sm">Support</span>
+              </div>
+
+              {/* Card Section */}
+              <div className="bg-white rounded-xl p-8 text-[#1A202C] shadow-lg max-w-md">
+
+                <h2 className="text-2xl font-bold mb-4">
+                  Reach financial goals faster
+                </h2>
+
+                <p className="text-gray-500 text-sm mb-6">
+                  Use your card around the world with no hidden fees.
+                  Hold, transfer and spend money easily.
+                </p>
+
+                <button className="bg-[#184D3B] text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-[#123c2e] transition">
+                  Learn more
+                </button>
+
+              </div>
+
+              {/* Bottom Content */}
+              <div className="text-center mt-10">
+                <h3 className="text-3xl font-semibold mb-3">
+                  Introducing new features
+                </h3>
+
+                <p className="text-sm text-white/70 max-w-md mx-auto">
+                  Analyzing previous trends ensures that businesses always make
+                  the right decision and scale effectively over time.
+                </p>
+
+                {/* Slider Dots */}
+                <div className="flex justify-center gap-2 mt-6">
+                  <span className="w-2 h-2 bg-white/40 rounded-full"></span>
+                  <span className="w-2 h-2 bg-white rounded-full"></span>
+                  <span className="w-2 h-2 bg-white/40 rounded-full"></span>
+                </div>
+              </div>
 
             </div>
           </div>
