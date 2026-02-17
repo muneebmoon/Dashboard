@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 // Layouts
 
@@ -19,6 +20,8 @@ import AuthContext from "./context/AuthContext/AuthContext";
 
 // Routes
 
+import AppRoutes from "./routes/AppRoutes";
+
 export {
     
     // Components
@@ -28,12 +31,16 @@ export {
     // Pages
     Login,
     SignUp,
+    Dashboard,
 
     // Layouts
     AuthLayout,
     DashboardLayout,
 
     // Contexts
-    AuthContext
+    AuthContext,
+
+    // Routes
+    AppRoutes
 }
 

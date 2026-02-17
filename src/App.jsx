@@ -1,10 +1,12 @@
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import { AppRoutes } from 'Central.js'
 
 function App() {
   return (
-    <div>
-      <h1 className='text-6xl'>Hello</h1>
-    </div>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   )
 }
 
