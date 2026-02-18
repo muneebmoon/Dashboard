@@ -28,6 +28,11 @@ function SignUp() {
   function saveUser(fullname, email, password) {
     const existingUsers = JSON.parse(localStorage.getItem('Users')) || [];
 
+    const user = existingUsers.find(user => user.email === email);
+    if (user) {
+      setError("Email already exists. Please use a different email.");
+      return;
+    }
     const newUser = { fullname, email, password };
 
     const updatedUsers = [...existingUsers, newUser];
@@ -37,6 +42,8 @@ function SignUp() {
     setEmail('');
     setPassword('');
     setConfirmPassword('');
+    navigate('/');
+
   }
 
 
@@ -58,7 +65,6 @@ function SignUp() {
       return;
     }
     saveUser(fullname, email, password);
-    navigate('/');
   }
 
   return (
@@ -126,9 +132,7 @@ function SignUp() {
                   onChange={handlePasswordChange}
                   required
                 />
-                {error && (
-                  <div className="text-red-500 text-sm mt-1">{error}</div>
-                )}
+                
               </div>
 
               {/* Confirm Password */}
@@ -144,6 +148,9 @@ function SignUp() {
                   <div className="text-red-500 text-sm">
                     Passwords do not match
                   </div>
+                )}
+                {error && (
+                  <div className="text-red-500 text-sm mt-1">{error}</div>
                 )}
               </div>
 
