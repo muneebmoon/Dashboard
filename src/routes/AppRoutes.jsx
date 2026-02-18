@@ -1,28 +1,31 @@
 import React from 'react'
 import { Routes , Route, Navigate } from 'react-router-dom'
-import { AuthLayout, Login, SignUp, DashboardLayout, Dashboard, Products } from 'Central.js'
+import { AuthLayout, Login, SignUp, DashboardLayout, Dashboard, Products, Customers,Settings, Orders, Shippments, Transactions } from 'Central.js'
 import ForgotPassword from '../pages/ForgotPassword'
 import PrivateRoute from './PrivateRoute'; // Path to your helper
 
 function AppRoutes() {
     return (
         <Routes>
-            {/* PUBLIC ROUTES - Do NOT wrap these in PrivateRoute */}
             <Route element={<AuthLayout />}>
                 <Route index element={<Login />} />
                 <Route path="signup" element={<SignUp />} />
                 <Route path='forgot-password' element={<ForgotPassword />} />
             </Route>
 
-            {/* PROTECTED ROUTES - Only Dashboard stuff goes here */}
+            
             <Route element={<PrivateRoute />}>
-                <Route path='dashboard' element={<DashboardLayout />}>
-                    <Route index element={<Dashboard />} />
+                <Route path='welcome' element={<DashboardLayout />}>
+                    <Route path='dashboard' element={<Dashboard />} />
                     <Route path='products' element={<Products />} />
+                    <Route path='customers' element={<Customers />} />
+                    <Route path='orders' element={<Orders />} />
+                    <Route path='shippments' element={<Shippments />} />
+                    <Route path='transactions' element={<Transactions />} />
+                    <Route path='settings' element={<Settings />} />
                 </Route>
             </Route>
             
-            {/* Optional: Redirect any unknown path to login */}
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     )

@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, grid } from "Central.js";
+import { Input, grid,Menu, notification, avatar } from "Central.js";
 import CircularProgress from "../../components/CircularProgress";
 
 function Dashboard() {
@@ -42,16 +42,16 @@ function Dashboard() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <img src={grid} alt="menu" />
-                    <img src={grid} alt="notification" />
+                    <img src={Menu} alt="menu" />
+                    <img src={notification} alt="notification" />
 
                     <div className="flex items-center gap-2">
                         <img
-                            src={grid}
+                            src={avatar}
                             alt="profile"
                             className="w-8 h-8 rounded-full"
                         />
-                        <span>{users[0]?.name || "User"}</span>
+                        <span>{users.fullname}</span>
                     </div>
                 </div>
             </div>

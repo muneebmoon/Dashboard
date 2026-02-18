@@ -15,7 +15,7 @@ function Login() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/dashboard');
+      navigate('/welcome/dashboard');
     }
   }, [isLoggedIn, navigate]);
 
@@ -28,7 +28,7 @@ function Login() {
     const user = users.find(user => user.email === email && user.password === password);
     if (user) {
       localStorage.setItem('currentUser', JSON.stringify(user));
-      navigate('/dashboard');
+      navigate('/welcome/dashboard');
     } else {
       setError("Invalid email or password");
     }
