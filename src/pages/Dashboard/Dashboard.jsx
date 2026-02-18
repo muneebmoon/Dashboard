@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 function Dashboard() {
     const [users, setUsers] = useState(JSON.parse(localStorage.getItem('currentUser')) || []);
     return (
-        <div className=" bg-gray-100 p-8">
+        <div className=" min-h-screen bg-gray-100 p-8">
             <div className="max-w-md mx-auto bg-white rounded-lg shadow p-6">
                 <div className="space-y-4">
                     <div>
