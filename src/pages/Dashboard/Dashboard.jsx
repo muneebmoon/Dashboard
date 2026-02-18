@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, grid,Menu, notification, avatar } from "Central.js";
+import { Input, Menu, notification, avatar } from "Central.js";
 import CircularProgress from "../../components/CircularProgress";
 
 function Dashboard() {
@@ -30,20 +30,22 @@ function Dashboard() {
     );
 
     return (
-        <div className="main-container p-10 bg-gray-100 min-h-screen">
+        <div className="main-container p-4 md:p-6 lg:p-10 bg-gray-100 min-h-screen">
 
-            <div className="navigation-container flex justify-between items-center mb-10">
-                <h1 className="text-4xl font-bold text-gray-700">
+            {/* Header */}
+            <div className="navigation-container flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
+
+                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-700">
                     Overview
                 </h1>
 
-                <div className="w-1/3">
+                <div className="w-full lg:w-1/3">
                     <Input placeholder="Search" />
                 </div>
 
-                <div className="flex items-center gap-4">
-                    <img src={Menu} alt="menu" />
-                    <img src={notification} alt="notification" />
+                <div className="flex items-center gap-4 w-full lg:w-auto justify-between lg:justify-end">
+                    <img src={Menu} alt="menu" className="w-6" />
+                    <img src={notification} alt="notification" className="w-6" />
 
                     <div className="flex items-center gap-2">
                         <img
@@ -51,23 +53,30 @@ function Dashboard() {
                             alt="profile"
                             className="w-8 h-8 rounded-full"
                         />
-                        <span>{users.fullname}</span>
+                        <span className="text-sm md:text-base">
+                            {users.fullname}
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div className="total-revenue-container flex gap-10">
+            {/* Main Section */}
+            <div className="total-revenue-container flex flex-col lg:flex-row gap-6">
 
-                <div className=" bg-white p-8 rounded-lg shadow w-2/3">
-                    <h2 className="text-2xl font-bold text-gray-600">
+                {/* Revenue Card */}
+                <div className="bg-white p-5 md:p-6 lg:p-8 rounded-lg shadow w-full lg:w-2/3">
+
+                    <h2 className="text-xl md:text-2xl font-bold text-gray-600">
                         Total Revenue
                     </h2>
 
-                    <p className="text-3xl font-semibold mt-2">
+                    <p className="text-2xl md:text-3xl font-semibold mt-2">
                         PKR {totalRevenue.toLocaleString()}
                     </p>
 
-                    <div className="mt-10 h-64 flex items-end gap-4">
+                    {/* Chart */}
+                    <div className="mt-8 h-52 md:h-64 flex items-end gap-3 overflow-x-auto">
+
                         {revenueData.map((item, index) => {
                             const height =
                                 (item.revenue / maxRevenue) * 100;
@@ -75,12 +84,11 @@ function Dashboard() {
                             return (
                                 <div
                                     key={index}
-                                    className="flex flex-col items-center flex-1 h-full"
+                                    className="flex flex-col items-center flex-1 min-w-[30px] h-full"
                                 >
-
                                     <div className="flex items-end h-full w-full justify-center">
                                         <div
-                                            className="bg-[#FFC029] w-6 rounded-t-md"
+                                            className="bg-[#FFC029] w-5 md:w-6 rounded-t-md"
                                             style={{ height: `${height}%` }}
                                         />
                                     </div>
@@ -94,27 +102,43 @@ function Dashboard() {
                     </div>
                 </div>
 
-                <div className="customer-container w-1/3">
-                    <div className="bg-white p-8 rounded-lg shadow w-full">
-                        <h2 className="text-2xl font-bold text-gray-600">
+                {/* Customers Card */}
+                <div className="customer-container w-full lg:w-1/3">
+
+                    <div className="bg-white p-5 md:p-6 lg:p-8 rounded-lg shadow w-full">
+
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-600">
                             Total Customers
                         </h2>
-                        <div className="customers-data grid grid-cols-2 gap-5 mt-10 place-items-center">
-                            <div className="current-customer">
-                                <CircularProgress percentage={85} size={120} stroke={10} color="#5F27CD" />
-                                <p className="text-center mt-2 text-gray-600">Active Customers</p>
+
+                        <div className="customers-data grid grid-cols-2 gap-6 mt-8 place-items-center">
+
+                            <div>
+                                <CircularProgress percentage={85} size={100} stroke={10} color="#5F27CD" />
+                                <p className="text-center mt-2 text-sm text-gray-600">
+                                    Active Customers
+                                </p>
                             </div>
-                            <div className="current-customer">
-                                <CircularProgress percentage={66} size={120} stroke={10} color="#FFC029" />
-                                <p className="text-center mt-2 text-gray-600">Retargeted Customers</p>
+
+                            <div>
+                                <CircularProgress percentage={66} size={100} stroke={10} color="#FFC029" />
+                                <p className="text-center mt-2 text-sm text-gray-600">
+                                    Retargeted Customers
+                                </p>
                             </div>
-                            <div className="current-customer">
-                                <CircularProgress percentage={90} size={120} stroke={10} color="#FF8918" />
-                                <p className="text-center mt-2 text-gray-600">New Customers</p>
+
+                            <div>
+                                <CircularProgress percentage={90} size={100} stroke={10} color="#FF8918" />
+                                <p className="text-center mt-2 text-sm text-gray-600">
+                                    New Customers
+                                </p>
                             </div>
-                            <div className="current-customer">
-                                <CircularProgress percentage={30} size={120} stroke={10} color="#FF6B6B" />
-                                <p className="text-center mt-2 text-gray-600">Returning Customers</p>
+
+                            <div>
+                                <CircularProgress percentage={30} size={100} stroke={10} color="#FF6B6B" />
+                                <p className="text-center mt-2 text-sm text-gray-600">
+                                    Returning Customers
+                                </p>
                             </div>
 
                         </div>
