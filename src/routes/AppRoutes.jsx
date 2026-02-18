@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes , Route, Navigate } from 'react-router-dom'
 import { AuthLayout, Login, SignUp, DashboardLayout, Dashboard, Products, Customers,Settings, Orders, Shippments, Transactions } from 'Central.js'
 import ForgotPassword from '../pages/ForgotPassword'
-import PrivateRoute from './PrivateRoute'; // Path to your helper
+import PrivateRoute from './PrivateRoute'; 
 
 function AppRoutes() {
     return (
