@@ -6,9 +6,14 @@ import Footer from '../components/Footer'
 function DashboardLayout() {
     return (
         <>
-            <NavBar />
-            <Outlet />
-            <Footer />
+            <div className="main-container flex min-h-screen">
+                <div className="navbar w-[15%]">
+                    <NavBar />
+                </div>
+                <div className="content flex-grow bg-[#F3F3F3]">
+                    <Outlet />
+                </div>
+            </div>
         </>
     )
 }
