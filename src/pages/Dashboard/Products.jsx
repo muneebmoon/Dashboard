@@ -6,6 +6,8 @@ function Products() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isTrue, setIsTrue] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -17,7 +19,7 @@ function Products() {
     const storedProducts = localStorage.getItem('products');
     if (storedProducts) {
       setProducts(JSON.parse(storedProducts));
-    } 
+    }
   }, []);
 
   useEffect(() => {
@@ -47,17 +49,17 @@ function Products() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (editingProduct) {
-      
+
       const updatedProducts = products.map(product =>
-        product.id === editingProduct.id 
+        product.id === editingProduct.id
           ? { ...product, ...formData, price: parseFloat(formData.price) }
           : product
       );
       setProducts(updatedProducts);
     } else {
-      
+
       const newProduct = {
         id: Date.now(),
         ...formData,
@@ -65,7 +67,7 @@ function Products() {
       };
       setProducts([...products, newProduct]);
     }
-    
+
     resetForm();
   };
 
@@ -81,15 +83,17 @@ function Products() {
   };
 
   const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this product?')) {
+    setIsTrue(true)
+    if (isTrue) {
       const updatedProducts = products.filter(product => product.id !== id);
       setProducts(updatedProducts);
+      setIsOpen(false)
     }
   };
 
   const handleStatusToggle = (id) => {
     const updatedProducts = products.map(product =>
-      product.id === id 
+      product.id === id
         ? { ...product, status: product.status === 'active' ? 'inactive' : 'active' }
         : product
     );
@@ -108,7 +112,7 @@ function Products() {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
-     
+
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Product Management</h1>
           <p className="text-gray-600 mt-2">Manage your products inventory</p>
@@ -155,16 +159,16 @@ function Products() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Total Value</p>
-                <p className="text-2xl font-bold text-purple-600">${totalValue}</p>
+                <p className="text-2xl font-bold text-purple-600">PKR {totalValue}</p>
               </div>
-              <div className="bg-purple-100 p-3 rounded-full">
+              {/* <div className="bg-purple-100 p-3 rounded-full">
                 <span className="text-purple-600 font-bold">PKR</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
 
-       
+
         <div className="bg-white rounded-lg shadow p-4 mb-6">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="relative flex-1">
@@ -190,7 +194,7 @@ function Products() {
           </div>
         </div>
 
-       
+
         {showForm && (
           <div className="bg-white rounded-lg shadow p-6 mb-6 border-2 border-blue-200">
             <h2 className="text-xl font-bold text-gray-800 mb-4">
@@ -313,17 +317,16 @@ function Products() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">
-                          ${product.price.toFixed(2)}
+                          PKR {product.price.toFixed(2)}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <button
                           onClick={() => handleStatusToggle(product.id)}
-                          className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                            product.status === 'active'
-                              ? 'bg-green-100 text-green-800 hover:bg-green-200'
-                              : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
-                          }`}
+                          className={`px-2 py-1 text-xs font-semibold rounded-full ${product.status === 'active'
+                            ? 'bg-green-100 text-green-800 hover:bg-green-200'
+                            : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                            }`}
                         >
                           {product.status}
                         </button>
@@ -338,12 +341,24 @@ function Products() {
                             <Edit className="w-4 h-4" />
                           </button>
                           <button
-                            onClick={() => handleDelete(product.id)}
+                            onClick={() => setIsOpen(true)}
                             className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50"
                             title="Delete"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
+                          {isOpen && (
+                            <div className="fixed inset-0 bg-black/40 flex justify-center items-center p-4">
+                              <div className="bg-white rounded-xl p-6 w-full max-w-lg space-y-4">
+                                <h1 className='text-[clamp(1rem,8vw,1.5rem)]'>Confirmation!</h1>
+                                <p>Are you sure you want to delete this product?</p>
+                                <div className="buttons flex gap-10 justify-end">
+                                  <button className='bg-gray-500 w-[25%] rounded-lg text-white' onClick={() => setIsOpen(false)}>Cancel</button>
+                                  <button className='bg-red-500 w-[25%] p-2 text-lg rounded-lg text-white' onClick={() => handleDelete(product.id)}>Yes</button>
+                                </div>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </td>
                     </tr>
@@ -362,7 +377,7 @@ function Products() {
               </tbody>
             </table>
           </div>
-        
+
           <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
             <div className="flex items-center justify-between">
               <p className="text-sm text-gray-600">
