@@ -1,8 +1,9 @@
 import React from 'react'
 import { Routes , Route, Navigate } from 'react-router-dom'
-import { AuthLayout, Login, SignUp, DashboardLayout, Dashboard, Products, Customers,Settings, Orders, Shippments, Transactions } from 'Central.js'
+import { AuthLayout, Login, SignUp, DashboardLayout, Dashboard, Products, NotFound, Customers,Settings, Orders, Shippments, Transactions } from 'Central.js'
 import ForgotPassword from '../pages/ForgotPassword'
 import PrivateRoute from './PrivateRoute'; 
+import {  } from '../Central';
 
 function AppRoutes() {
     return (
@@ -26,7 +27,7 @@ function AppRoutes() {
                 </Route>
             </Route>
             
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<NotFound />} />
         </Routes>
     )
 }

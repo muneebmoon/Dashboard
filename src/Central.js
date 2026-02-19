@@ -33,6 +33,7 @@ import Shippments from './pages/Dashboard/Shippments';
 import Transactions from './pages/Dashboard/Transactions';
 import Settings from './pages/Dashboard/Settings';
 import ForgotPassword from './pages/ForgotPassword';
+import NotFound from './pages/NotFound';
 
 // Layouts
 
@@ -80,6 +81,7 @@ export {
     Transactions,
     Settings,
     ForgotPassword,
+    NotFound,
 
     // Layouts
     AuthLayout,

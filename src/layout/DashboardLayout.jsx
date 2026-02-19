@@ -30,7 +30,7 @@ function DashboardLayout() {
            
             <div className="flex-1 ">
 
-                {/* Mobile Header */}
+                
                 <div className="lg:hidden flex items-center justify-between p-4 bg-white shadow">
 
                     <button
