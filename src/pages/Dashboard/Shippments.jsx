@@ -104,7 +104,7 @@ export default function Shippments() {
 
             <button
               onClick={openAddModal}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+              className="bg-[#FF6B6B] text-white px-4 py-2 rounded-lg"
             >
               + Add
             </button>
@@ -244,7 +244,7 @@ export default function Shippments() {
 
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-blue-600 text-white rounded"
+                className="px-4 py-2 bg-[#FF6B6B] text-white rounded"
               >
                 Save
               </button>

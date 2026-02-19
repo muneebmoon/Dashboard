@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const STORAGE_KEY = "orders_data";
+const PRODUCTS_KEY = "products";
 
 const statusColors = {
   Pending: "bg-yellow-100 text-yellow-600",
@@ -9,10 +10,16 @@ const statusColors = {
   Cancelled: "bg-red-100 text-red-600",
 };
 
-export default function OrdersDashboard() {
-  
+export default function Orders() {
+
   const [orders, setOrders] = useState(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  });
+
+
+  const [products, setProducts] = useState(() => {
+    const stored = localStorage.getItem(PRODUCTS_KEY);
     return stored ? JSON.parse(stored) : [];
   });
 
@@ -29,12 +36,11 @@ export default function OrdersDashboard() {
     date: "",
   });
 
-  
+
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
   }, [orders]);
 
-  
 
   const openAddModal = () => {
     setForm({
@@ -56,7 +62,7 @@ export default function OrdersDashboard() {
   };
 
   const handleSave = () => {
-    if (!form.id || !form.customer) return;
+    if (!form.id || !form.customer || !form.product) return;
 
     if (editingIndex !== null) {
       const updated = [...orders];
@@ -74,6 +80,7 @@ export default function OrdersDashboard() {
     setOrders(updated);
   };
 
+
   const filteredOrders = orders.filter((o) =>
     o.id.toLowerCase().includes(search.toLowerCase())
   );
@@ -86,7 +93,6 @@ export default function OrdersDashboard() {
   return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-6">
       <div className="max-w-7xl mx-auto space-y-6">
-
         {/* Header */}
         <div className="flex flex-col md:flex-row md:justify-between gap-3">
           <h1 className="text-2xl md:text-3xl font-bold">Orders Management</h1>
@@ -102,7 +108,7 @@ export default function OrdersDashboard() {
 
             <button
               onClick={openAddModal}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+              className="bg-[#FF6B6B] text-white px-4 py-2 rounded-lg"
             >
               + Add Order
             </button>
@@ -138,7 +144,7 @@ export default function OrdersDashboard() {
                   <td className="p-4 font-medium">{order.id}</td>
                   <td className="p-4">{order.customer}</td>
                   <td className="p-4">{order.product}</td>
-                  <td className="p-4">${order.amount}</td>
+                  <td className="p-4">PKR {order.amount}</td>
                   <td className="p-4">{order.date}</td>
 
                   <td className="p-4">
@@ -197,20 +203,38 @@ export default function OrdersDashboard() {
               onChange={(e) => setForm({ ...form, customer: e.target.value })}
             />
 
-            <input
-              placeholder="Product"
+           
+            <select
               className="w-full border p-2 rounded"
               value={form.product}
-              onChange={(e) => setForm({ ...form, product: e.target.value })}
-            />
+              onChange={(e) => {
+                const selectedProduct = products.find(
+                  (prod) => prod.name === e.target.value
+                );
+                setForm({
+                  ...form,
+                  product: e.target.value,
+                  amount: selectedProduct.price ? selectedProduct.price : "",
+                });
+              }}
+            >
+              <option value="">Select Product</option>
+              {products.map((prod, i) => (
+                <option key={i} value={prod.name}>
+                  {prod.name}
+                </option>
+              ))}
+            </select>
 
+            
             <input
               type="number"
               placeholder="Amount"
-              className="w-full border p-2 rounded"
+              className="w-full border p-2 rounded bg-gray-100"
               value={form.amount}
-              onChange={(e) => setForm({ ...form, amount: e.target.value })}
+              readOnly
             />
+
 
             <input
               type="date"
@@ -240,7 +264,7 @@ export default function OrdersDashboard() {
 
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-blue-600 text-white rounded"
+                className="px-4 py-2 bg-[#FF6B6B] text-white rounded"
               >
                 Save
               </button>
@@ -252,6 +276,7 @@ export default function OrdersDashboard() {
   );
 }
 
+/* ================= CARD COMPONENT ================= */
 function Card({ title, value }) {
   return (
     <div className="bg-white p-4 rounded-xl shadow">

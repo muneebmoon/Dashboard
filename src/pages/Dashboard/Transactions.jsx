@@ -105,7 +105,7 @@ export default function Transactions() {
 
             <button
               onClick={openAddModal}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+              className="bg-[#FF6B6B] text-white px-4 py-2 rounded-lg"
             >
               + Add Transaction
             </button>
@@ -243,7 +243,7 @@ export default function Transactions() {
 
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-blue-600 text-white rounded"
+                className="px-4 py-2 bg-[#FF6B6B] text-white rounded"
               >
                 Save
               </button>

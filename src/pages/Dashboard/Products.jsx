@@ -87,6 +87,7 @@ function Products() {
     if (isTrue) {
       const updatedProducts = products.filter(product => product.id !== id);
       setProducts(updatedProducts);
+      localStorage.setItem('products', JSON.stringify(updatedProducts))
       setIsOpen(false)
     }
   };
