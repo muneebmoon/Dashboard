@@ -114,7 +114,7 @@ export default function Transactions() {
 
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Card title="Total Revenue" value={`$${totalRevenue}`} />
+          <Card title="Total Revenue" value={`PKR ${totalRevenue}`} />
           <Card title="Success" value={success} />
           <Card title="Pending" value={pending} />
           <Card title="Failed" value={failed} />
